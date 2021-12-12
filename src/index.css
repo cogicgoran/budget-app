@@ -18,3 +18,9 @@ input, button {
     font-size: inherit;
     border: none;
 }
+
+@media screen and (max-width:992px) {
+    body {
+        padding: 0 .5em;
+    }
+}
