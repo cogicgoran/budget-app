@@ -2,7 +2,7 @@ export const DUMMY_ITEMS = [
     {
       id: 'e1',
       product: "Marijana",
-      price: "0",
+      price: "99999999",
       date: new Date("2021-05-12")
     },
     {
@@ -35,4 +35,10 @@ export const DUMMY_ITEMS = [
         price: "180",
         date: new Date("2021-11-13")
     },
+    {
+      id: 'e7',
+      product: "Jagoda",
+      price: "228",
+      date: new Date("2021-07-03")
+  }
 ]

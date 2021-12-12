@@ -4,8 +4,25 @@
     background-color: lightblue;
 }
 
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input {
+    padding: 2px 4px;
+    background-color: rgb(212, 246, 255);
+    border-radius: 4px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: wheat;
+}
+
+.search-form input {
+    flex: 1 1 0;
+}
+
 .show-items__article-wrapper {
-    /* border: 2px solid rgb(123, 182, 202); */
     background-color: rgb(123, 182, 202);
     padding: 0.2em;
     border-radius: 0.1em;
@@ -30,10 +47,6 @@
 
 .show-items__header {
     color: white;
-}
-
-.show-items__header * {
-    /* background-color: lightgreen; */
 }
 
 .show-items__product {
