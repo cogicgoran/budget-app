@@ -21,7 +21,6 @@ function AddNewItem( props ) {
         setIsFormToggled(prevState => !prevState);
     };
 
-    
     const {
         value: productName,
         valueIsValid: productNameIsValid,
@@ -53,6 +52,12 @@ function AddNewItem( props ) {
 
     if (productNameIsValid && productPriceIsValid && productDateIsValid) formIsValid = true;
 
+    function resetInputFields() {
+        productNameReset();
+        productPriceReset();
+        productDateReset();
+    }
+
     function formSubmitHandler(e) {
         e.preventDefault();
 
@@ -64,9 +69,7 @@ function AddNewItem( props ) {
             date: new Date(productDate)
         };
         console.log(product);
-        productNameReset();
-        productPriceReset();
-        productDateReset();
+        resetInputFields();
         // props.onAddNewItem(product);
     };
 
@@ -76,7 +79,7 @@ function AddNewItem( props ) {
 
     return (
         <div className={styles["add-items-container"]}>
-            {!isFormToggled && <div><button type="button" onClick={formToggleHandler}>Add New Item</button></div>}
+            {!isFormToggled && <div className={styles["add-items__btn-container"]}><button type="button" onClick={formToggleHandler}>Add New Item</button></div>}
             {isFormToggled && <form onSubmit={formSubmitHandler}>
                 <div className={styles["add-items__controls-container"]}>
                     <div className={productNameClasses}>
@@ -85,14 +88,14 @@ function AddNewItem( props ) {
                     </div>
                     <div className={productPriceClasses}>
                         <label htmlFor="price">Product Price:</label>
-                        <input type="number" step="1" name="price" value={productPrice} onChange={productPriceChangeHandler} onBlur={productPriceBlurHandler} />
+                        <input autoComplete="off" type="number" step="1" min="0" name="price" value={productPrice} onChange={productPriceChangeHandler} onBlur={productPriceBlurHandler} />
                     </div>
                     <div className={productDateClasses}>
                         <label htmlFor="date">Product Date:</label>
                         <input type="date" name="date" value={productDate} onChange={productDateChangeHandler} onBlur={productDateBlurHandler} />
                     </div>
                 </div>
-                <div>
+                <div className={styles["add-items__btn-container"]}>
                    <div><button type="submit">Add Product</button></div> 
                    <div><button type="button" onClick={formToggleHandler}>Cancel</button></div> 
                 </div>
