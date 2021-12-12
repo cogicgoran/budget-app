@@ -3,28 +3,7 @@ import Header from './components/Header';
 import AddNewItem from './components/AddNewItem';
 import ShowItems from './components/ShowItems';
 import { useState } from 'react';
-
-
-const DUMMY_ITEMS = [
-  {
-    id: 'e1',
-    product: "banana",
-    price: "22",
-    date: new Date("2021-12-04")
-  },
-  {
-    id: 'e2',
-    product: "jabuka",
-    price: "31",
-    date: new Date("2021-12-08")
-  },
-  {
-    id: 'e3',
-    product: "krompir",
-    price: "28",
-    date: new Date("2021-12-08")
-  },
-]
+import { DUMMY_ITEMS } from './dummy-data/dummyData';
 
 function App() {
   const [items, setItems] = useState(DUMMY_ITEMS);
@@ -32,7 +11,7 @@ function App() {
 
   function addNewItemHandler(item) {
     item.id = counter;
-    setItems( prevState => ([...prevState, item]));
+    setItems( prevState => ([item, ...prevState]));
     setCounter(prevCounter => ++prevCounter);
   }
 

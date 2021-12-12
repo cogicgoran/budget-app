@@ -1,0 +1,51 @@
+.show-items {
+    padding: 1em .5em;
+    border-radius: .5em;
+    background-color: lightblue;
+}
+
+.show-items__article-wrapper {
+    /* border: 2px solid rgb(123, 182, 202); */
+    background-color: rgb(123, 182, 202);
+    padding: 0.2em;
+    border-radius: 0.1em;
+}
+
+.show-items__article,
+.show-items__header {
+    display: flex;
+    gap: 1em;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+}
+
+.show-items__article *,
+.show-items__header * {
+    padding: 0.1em 0.2em;
+}
+
+.show-items__article * {
+    background-color: rgb(200, 221, 228);
+}
+
+.show-items__header {
+    color: white;
+}
+
+.show-items__header * {
+    /* background-color: lightgreen; */
+}
+
+.show-items__product {
+    flex: 1 0 0;
+}
+
+.show-items__price {
+    width: 5em;
+    text-align: right;
+}
+
+.show-items__date {
+    width: 10em;
+    text-align: right;
+}

@@ -1,8 +1,8 @@
 .header {
     padding: 12px 0;
-    margin-bottom: 16px;
+    margin-bottom: 1em;
     border-radius: 8px;
-    background-color: #40020c;
+    background-color:lightblue;
 }
 
 .header__title {

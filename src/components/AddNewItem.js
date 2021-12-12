@@ -7,7 +7,7 @@ function validateProductName(name) {
 };
 
 function validateProductPrice(price) {
-    return Number(price) > 0;
+    return Number(price) > 0 && price.length < 9;
 };
 
 function validateProductDate(date) {
@@ -70,7 +70,7 @@ function AddNewItem( props ) {
         };
         console.log(product);
         resetInputFields();
-        // props.onAddNewItem(product);
+        props.onAddNewItem(product);
     };
 
     const productNameClasses = productNameHasError ? styles.invalid : "";
@@ -88,11 +88,11 @@ function AddNewItem( props ) {
                     </div>
                     <div className={productPriceClasses}>
                         <label htmlFor="price">Product Price:</label>
-                        <input autoComplete="off" type="number" step="1" min="0" name="price" value={productPrice} onChange={productPriceChangeHandler} onBlur={productPriceBlurHandler} />
+                        <input autoComplete="off" type="number" step="1" min="0" max="9999999" name="price" value={productPrice} onChange={productPriceChangeHandler} onBlur={productPriceBlurHandler} />
                     </div>
                     <div className={productDateClasses}>
                         <label htmlFor="date">Product Date:</label>
-                        <input type="date" name="date" value={productDate} onChange={productDateChangeHandler} onBlur={productDateBlurHandler} />
+                        <input type="date" name="date" min="2010-01-01" max="2036-01-01" value={productDate} onChange={productDateChangeHandler} onBlur={productDateBlurHandler} />
                     </div>
                 </div>
                 <div className={styles["add-items__btn-container"]}>

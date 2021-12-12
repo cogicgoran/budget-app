@@ -1,7 +1,8 @@
 .add-items-container {
-    padding: 8px 4px;
+    padding: 1em .5em;
+    margin-bottom: 1em;
     border-radius: 8px;
-    background-color:#40020c;
+    background-color:lightblue;
 }
 
 .add-items__btn-container {
@@ -13,8 +14,9 @@
     margin-top: .5em;
     padding: .5em 1em;
     border-radius: 4px;
-    background-color:#3333ff;
+    background-color:rgb(131, 186, 204);
     text-align: center;
+    cursor: pointer;
 }
 
 
@@ -32,7 +34,7 @@
 .add-items__controls-container input {
     width: 100%;
     padding: 2px 4px;
-    background-color: #40020c;
+    background-color: rgb(212, 246, 255);
     border-radius: 4px;
     border-width: 2px;
     border-style: solid;
