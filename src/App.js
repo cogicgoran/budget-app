@@ -1,7 +1,7 @@
-import  classes  from './App.module.css';
-import Header from './components/Header';
-import AddNewItem from './components/AddNewItem';
-import ShowItems from './components/ShowItems';
+import styles from './App.module.css';
+import Header from './components/header/Header';
+import AddNewItem from './components/add-new-items/AddNewItem';
+import ShowItems from './components/show-items/ShowItems';
 import { useCallback, useMemo, useState } from 'react';
 import { DUMMY_ITEMS } from './dummy-data/dummyData';
 
@@ -27,7 +27,7 @@ function App() {
   const filteredItemsMemoed = useMemo(() => {return [...filteredItems]}, [filteredItems]);
 
   return (
-    <div className={classes["app-container"]}>
+    <div className={styles["app-container"]}>
       <Header />
       <AddNewItem onAddNewItem={addNewItemHandler}/>
       <ShowItems items={filteredItemsMemoed} onFilterItems={filterItemsHandler}/>

@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
-import useInput from '../hooks/useInput';
+import useInput from '../../custom-hooks/useInput';
 import styles from './AddNewItem.module.css';
-
-function validateProductName(name) {
-    return name.length > 0;
-};
-
-function validateProductPrice(price) {
-    return Number(price) > 0 && price.length < 9;
-};
-
-function validateProductDate(date) {
-    return date.length !== 0;
-}
+import {validateProductName, validateProductPrice, validateProductDate} from './AddNewItem.validation';
 
 function AddNewItem( props ) {
     const [isFormToggled, setIsFormToggled] = useState(false);
