@@ -1,87 +1,47 @@
-import React, { useState } from 'react';
-import useInput from '../../custom-hooks/useInput';
+import React, { useRef, useState } from 'react';
 import styles from './AddNewItem.module.css';
 import {validateProductName, validateProductPrice, validateProductDate} from './AddNewItem.validation';
+import Input from '../UI/Input';
 
 function AddNewItem( props ) {
     const [isFormToggled, setIsFormToggled] = useState(false);
+    const productRef = useRef();
+    const priceRef = useRef();
+    const dateRef = useRef();
     
     function formToggleHandler() {
         setIsFormToggled(prevState => !prevState);
     };
 
-    const {
-        value: productName,
-        valueIsValid: productNameIsValid,
-        valueHasError: productNameHasError,
-        valueChangeHandler: productNameChangeHandler,
-        inputBlurHandler: productNameBlurHandler,
-        reset: productNameReset
-    } = useInput(validateProductName);
-
-    const {
-        value: productPrice,
-        valueIsValid: productPriceIsValid,
-        valueHasError: productPriceHasError,
-        valueChangeHandler: productPriceChangeHandler,
-        inputBlurHandler: productPriceBlurHandler,
-        reset: productPriceReset
-    } = useInput(validateProductPrice);
-    
-    const {
-        value: productDate,
-        valueIsValid: productDateIsValid,
-        valueHasError: productDateHasError,
-        valueChangeHandler: productDateChangeHandler,
-        inputBlurHandler: productDateBlurHandler,
-        reset: productDateReset
-    } = useInput(validateProductDate);
-    
-    let formIsValid = false;
-
-    if (productNameIsValid && productPriceIsValid && productDateIsValid) formIsValid = true;
-
-    function resetInputFields() {
-        productNameReset();
-        productPriceReset();
-        productDateReset();
-    }
-
     function formSubmitHandler(e) {
         e.preventDefault();
+        const product = productRef.current.value;
+        const price = priceRef.current.value;
+        const date = dateRef.current.value;
 
-        if (!formIsValid) return;
+        if(!(validateProductName(product) && validateProductPrice(price) && validateProductDate(date))) return;
 
-        const product = {
-            product: productName,
-            price: productPrice,
-            date: new Date(productDate)
+        const item = {
+            product: product,
+            price: price,
+            date: new Date(date)
         };
-        resetInputFields();
-        props.onAddNewItem(product);
-    };
 
-    const productNameClasses = productNameHasError ? styles.invalid : "";
-    const productPriceClasses = productPriceHasError ? styles.invalid : "";
-    const productDateClasses = productDateHasError ? styles.invalid : "";
+        props.onAddNewItem(item);
+
+        productRef.current.value = "";
+        priceRef.current.value = "";
+        dateRef.current.value = "";
+    };
 
     return (
         <div className={styles["add-items-container"]}>
             {!isFormToggled && <div className={styles["add-items__btn-container"]}><button type="button" onClick={formToggleHandler}>Add New Item</button></div>}
             {isFormToggled && <form onSubmit={formSubmitHandler}>
                 <div className={styles["add-items__controls-container"]}>
-                    <div className={productNameClasses}>
-                        <label htmlFor="product">Product Name:</label>
-                        <input type="text" name="product" value={productName} onChange={productNameChangeHandler} onBlur={productNameBlurHandler} />
-                    </div>
-                    <div className={productPriceClasses}>
-                        <label htmlFor="price">Product Price:</label>
-                        <input autoComplete="off" type="number" step="1" min="0" max="9999999" name="price" value={productPrice} onChange={productPriceChangeHandler} onBlur={productPriceBlurHandler} />
-                    </div>
-                    <div className={productDateClasses}>
-                        <label htmlFor="date">Product Date:</label>
-                        <input type="date" name="date" min="2010-01-01" max="2036-01-01" value={productDate} onChange={productDateChangeHandler} onBlur={productDateBlurHandler} />
-                    </div>
+                    <Input ref={productRef} label="Product Name:" input={{id:"product", type: "text", name: "product"}} validator={validateProductName}></Input>
+                    <Input ref={priceRef} label="Product Price:" input={{id:"price", type: "number", name: "price", min:"0", max:"99999999", step:"1"}} validator={validateProductPrice}></Input>
+                    <Input ref={dateRef} label="Product Date:" input={{id:"date", type: "date", name: "date", min:"2010-01-01", max:"2036-01-01"}} validator={validateProductDate}></Input>
                 </div>
                 <div className={styles["add-items__btn-container"]}>
                    <div><button type="submit">Add Product</button></div> 

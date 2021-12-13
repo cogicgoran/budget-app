@@ -48,11 +48,3 @@
 .add-items__controls-container label {
     display: block;
 }
-
-.invalid input{
-    border-color:  red;
-    color: red;
-}
-.invalid label{
-    color: red;
-}
