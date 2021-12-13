@@ -1,24 +1,20 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './ShowItems.module.css';
 
 function ShowItems({ items, onFilterItems }) {
     const [searchValue, setSearchValue] = useState("");
+    console.log("ShowItems RUNNING");
 
-    function getItemComponents(items) {
-        console.log("getitmcom called");
+    function getItemComponents() {
         return items.map(item => {
             const date = item.date.toLocaleString('default', { day: "numeric", month: 'short', year:"numeric" })
             return (<article key={item.id} className={styles["show-items__article"]}>
                 <span className={styles["show-items__product"]}>{item.product}</span>
                 <span className={styles["show-items__price"]}>{item.price}</span>
                 <span className={styles["show-items__date"]}>{date}</span>
-                
             </article>)
         })
     }
-
-    // const getItemComponentsMemo = useMemo(() => getItemComponents(items));
-    
 
     function searchChangeHandler(e) {
         setSearchValue(e.target.value);
@@ -32,6 +28,7 @@ function ShowItems({ items, onFilterItems }) {
     }
 
     useEffect(() => {
+        console.log("efect ran");
         const timer = setTimeout(() => {
             onFilterItems({
                 search: searchValue
@@ -40,9 +37,7 @@ function ShowItems({ items, onFilterItems }) {
         return () => {
             clearTimeout(timer);
         }
-    }, [searchValue])
-
-    console.log("rendered");
+    }, [searchValue, onFilterItems])
 
     return (
         <div className={styles["show-items"]}>
@@ -62,7 +57,7 @@ function ShowItems({ items, onFilterItems }) {
                     <span className={styles["show-items__date"]}>Date</span>
                 </div>
                 <div>
-                    {getItemComponents(items)}
+                    {getItemComponents()}
                 </div>
             </div>
         </div>

@@ -40,5 +40,17 @@ export const DUMMY_ITEMS = [
       product: "Jagoda",
       price: "228",
       date: new Date("2021-07-03")
-  }
+    },
+    {
+      id: 'e8',
+      product: "Jaaaaaaaagoda",
+      price: "228",
+      date: new Date("2021-07-03")
+    },
+    {
+      id: 'e9',
+      product: "Jaaaaaagoda",
+      price: "228",
+      date: new Date("2021-07-03")
+    },
 ]

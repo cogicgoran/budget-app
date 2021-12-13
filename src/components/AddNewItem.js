@@ -68,7 +68,6 @@ function AddNewItem( props ) {
             price: productPrice,
             date: new Date(productDate)
         };
-        console.log(product);
         resetInputFields();
         props.onAddNewItem(product);
     };
@@ -104,4 +103,4 @@ function AddNewItem( props ) {
     )
 };
 
-export default AddNewItem;
+export default React.memo(AddNewItem);
