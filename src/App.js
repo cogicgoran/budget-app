@@ -19,11 +19,8 @@ function App() {
 
   // TODO: Find a way to not re-evaluate ShowItems if arguments passed have not changed
   const filterItemsHandler = useCallback(({ search, sortFn }) => {
-    console.log(search, sortFn)
     const lowerSearch = search.toLowerCase();
     const filterBySearch = items.filter(item => item.product.toLowerCase().includes(lowerSearch));
-    console.log("filybysearch:",filterBySearch);
-    console.log("filtbyFilt:",filterBySearch.sort(sortFn))
     setFilteredItems(filterBySearch.sort(sortFn));
   },[items])
 

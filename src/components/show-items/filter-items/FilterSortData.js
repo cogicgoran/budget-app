@@ -7,11 +7,11 @@ function sortDateAscending(a, b) {
 }
 
 function sortNameDescending(a, b) {
-  return a.product > b.product ? -1 : 1;
+  return a.product.toLowerCase() > b.product.toLowerCase() ? -1 : 1;
 }
 
 function sortNameAscending(a, b) {
-  return a.product > b.product ? 1 : -1;
+  return a.product.toLowerCase() > b.product.toLowerCase() ? 1 : -1;
 }
 
 function sortPriceDescending(a, b) {
@@ -23,8 +23,8 @@ function sortPriceAscending(a, b) {
 }
 
 export const dataLabelSortSet = [
-  {label: "Latest", data:"date-desc", sortFn: sortDateDescending},
-  {label: "Newest", data:"date-asc", sortFn: sortDateAscending},
+  {label: "Newer", data:"date-desc", sortFn: sortDateDescending},
+  {label: "Older", data:"date-asc", sortFn: sortDateAscending},
   {label: "Name Ascending", data:"name-asc", sortFn: sortNameAscending},
   {label: "Name Descending", data:"name-desc", sortFn: sortNameDescending},
   {label: "Price Ascending", data:"price-asc", sortFn: sortPriceAscending},

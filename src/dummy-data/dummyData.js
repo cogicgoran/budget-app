@@ -52,5 +52,11 @@ export const DUMMY_ITEMS = [
       product: "Jaaaaaagoda",
       price: "1",
       date: new Date("2021-07-03")
+    },
+    {
+      id: 'e10',
+      product: "brava",
+      price: "650",
+      date: new Date("2021-12-14")
     }
 ]

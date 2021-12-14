@@ -23,8 +23,8 @@ function FilterItems({ onFilterItems }) {
     const timer = setTimeout(() => {
       onFilterItems({
         search: searchValue,
-          sortFn: selectedSortValue.sortFn
-      })
+        sortFn: selectedSortValue.sortFn
+      });
     }, 500);
 
     return () => {
@@ -56,8 +56,8 @@ function FilterItems({ onFilterItems }) {
         <div className={styles['search-form__filter-sort-current']}>
           <li><span data-sort-by={selectedSortValue.data} onClick={toggleShowDropdownHandler}>{selectedSortValue.label}</span></li>
         {showDropdown && <ul className={styles['search-form__filter-sort-dropdown']}>
-          <li key="date-desc"><span data-sort-by="date-desc" onClick={sortByHandler}>Latest</span></li>
-          <li key="date-asc"><span data-sort-by="date-asc" onClick={sortByHandler}>Newest</span></li>
+          <li key="date-desc"><span data-sort-by="date-desc" onClick={sortByHandler}>Newer</span></li>
+          <li key="date-asc"><span data-sort-by="date-asc" onClick={sortByHandler}>Older</span></li>
           <li key="name-desc"><span data-sort-by="name-desc" onClick={sortByHandler}>Name Descending</span></li>
           <li key="name-asc"><span data-sort-by="name-asc" onClick={sortByHandler}>Name Ascending</span></li>
           <li key="price-desc"><span data-sort-by="price-desc" onClick={sortByHandler}>Price Descending</span></li>
