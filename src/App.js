@@ -9,16 +9,15 @@ function App() {
 
   const [items, setItems] = useState(DUMMY_ITEMS);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [counter, setCounter] = useState(1);
-
-  console.log("App RUNNING...");
+  const [counterID, setcounterID] = useState(1);
 
   const addNewItemHandler = useCallback((item) => {
-    item.id = counter;
+    item.id = counterID;
     setItems( prevState => ([item, ...prevState]));
-    setCounter(prevCounter => ++prevCounter);
-  },[counter])
+    setcounterID(prevCount => prevCount + 1);
+  },[counterID])
 
+  // TODO: Find a way to not re-evaluate ShowItems if arguments passed have not changed
   const filterItemsHandler = useCallback(({ search }) => {
     const lowerSearch = search.toLowerCase();
     setFilteredItems(items.filter(item => item.product.toLowerCase().includes(lowerSearch)));
