@@ -1,6 +1,6 @@
 .search-form {
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
 }
 
 .search-form input {
@@ -14,4 +14,10 @@
 
 .search-form input {
   flex: 1 1 0;
+}
+
+.search-form__filter-sort-dropdown button,
+.search-form__filter-sort-current button {
+  border: 1px solid red;
+  cursor: pointer;
 }
