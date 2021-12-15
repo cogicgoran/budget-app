@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './Input.module.css';
 
 const Input = React.forwardRef(function(props, ref) {
-  console.log("Input Running");
   const [value, setValue] = useState("");
   const [valueIsTouched, setValueIsTouched] = useState(false);
   
