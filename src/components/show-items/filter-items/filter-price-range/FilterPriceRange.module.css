@@ -1,0 +1,7 @@
+.search-form__filter-price-range {
+  width: calc(100% / 3);
+  text-align: center;
+  background-color: rgb(123, 182, 202);
+  border-radius: 4px;
+  padding: 0.2em;
+}

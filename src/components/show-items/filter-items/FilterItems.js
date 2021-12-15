@@ -1,70 +1,62 @@
 import React, {useState, useEffect} from 'react';
 import styles from './FilterItems.module.css';
-import { dataLabelSortSet } from './FilterSortData';
 
+import FilterSearchInput from './filter-search-input/FilterSearchInput';
+import FilterSort from './filter-sort/FilterSort';
+import FilterPriceRange from './filter-price-range/FilterPriceRange';
+import FilterDateRange from './filter-date-range/FilterDateRange';
+
+import { defaultSort } from './FilterSortData';
 
 function FilterItems({ onFilterItems }) {
   const [searchValue, setSearchValue] = useState("");
-  const [selectedSortValue, setSelectedSortValue] = useState(dataLabelSortSet[0]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showSortingOptions, setShowSortingOptions] = useState(false);
+  const [selectedSortValue, setSelectedSortValue] = useState(defaultSort);
+
+  console.log("filteritems RUNNING");
 
   function searchChangeHandler(e) {
+    console.log("called");
     setSearchValue(e.target.value);
   };
 
-  function searchSubmitHandler(e) {
-    e.preventDefault();
-    onFilterItems({
-      search: searchValue
-    });
+  function toggleShowSortingOptionsHandler() {
+    setShowSortingOptions(prevState => !prevState);
+  };
+
+  function sortValueChangeHandler(sortSet) {
+    setSelectedSortValue(sortSet);
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      console.log("effect executed");
       onFilterItems({
         search: searchValue,
         sortFn: selectedSortValue.sortFn
       });
-    }, 500);
+    }, 300);
 
     return () => {
       clearTimeout(timer);
     }
   }, [searchValue, onFilterItems, selectedSortValue]);
 
-  function toggleShowDropdownHandler() {
-    setShowDropdown(prevState => !prevState)
-  }
-
-  function sortByHandler(e) {
-    const selectedLabel = e.target.textContent;
-    const selectedData = e.target.getAttribute("data-sort-by");
-
-    const itemExists = dataLabelSortSet.find(set => (set.label === selectedLabel && set.data === selectedData));
-
-    if (!itemExists) return;
-
-    setSelectedSortValue(itemExists);
-  }
-  
   return (
     <div>
-      <form className={styles["search-form"]} onSubmit={searchSubmitHandler}>
-        <div>
-          <input type="search" value={searchValue} onChange={searchChangeHandler}/>
+      <form className={styles["search-form"]}>
+        <FilterSearchInput onSearchInputChange={searchChangeHandler}/>
+        <div className={styles["search-form__filter-wrapper"]}>
+          {!showSortingOptions && <div className={styles["search-form__open-container"]}><span className={styles["search-form__open"]} onClick={toggleShowSortingOptionsHandler}>Sort options</span></div>}
+          {showSortingOptions && <div>
+            <div className={styles["search-form__filters-container"]}>
+              <FilterSort onCloseSortingOptions={toggleShowSortingOptionsHandler} selectedSortValue={selectedSortValue} onSelectedSortValue={sortValueChangeHandler}/>
+              <FilterPriceRange />
+              <FilterDateRange />
+            </div>
+            <button className={styles["search-form__close"]} type='button' onClick={toggleShowSortingOptionsHandler}>Close</button>
+          </div>}
         </div>
-        <div className={styles['search-form__filter-sort-current']}>
-          <li><span data-sort-by={selectedSortValue.data} onClick={toggleShowDropdownHandler}>{selectedSortValue.label}</span></li>
-        {showDropdown && <ul className={styles['search-form__filter-sort-dropdown']}>
-          <li key="date-desc"><span data-sort-by="date-desc" onClick={sortByHandler}>Newer</span></li>
-          <li key="date-asc"><span data-sort-by="date-asc" onClick={sortByHandler}>Older</span></li>
-          <li key="name-desc"><span data-sort-by="name-desc" onClick={sortByHandler}>Name Descending</span></li>
-          <li key="name-asc"><span data-sort-by="name-asc" onClick={sortByHandler}>Name Ascending</span></li>
-          <li key="price-desc"><span data-sort-by="price-desc" onClick={sortByHandler}>Price Descending</span></li>
-          <li key="price-asc"><span data-sort-by="price-asc" onClick={sortByHandler}>Price Ascending</span></li>
-        </ul>}
-        </div>
-        <button type="submit">Search</button>
       </form>
 
     </div>

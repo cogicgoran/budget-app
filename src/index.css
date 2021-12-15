@@ -19,6 +19,12 @@ input, button {
     border: none;
 }
 
+ul, li {
+    padding: 0;
+    list-style: none;
+}
+
+
 @media screen and (max-width:992px) {
     body {
         padding: 0 .5em;

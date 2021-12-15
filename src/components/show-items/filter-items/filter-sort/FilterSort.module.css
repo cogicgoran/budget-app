@@ -1,0 +1,14 @@
+.search-form__filter-sort {
+  width: calc(100% / 3);
+  text-align: left;
+  background-color: rgb(123, 182, 202);
+  border-radius: 4px;
+  padding: 0.2em;
+}
+
+.search-form__filter-selected {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}

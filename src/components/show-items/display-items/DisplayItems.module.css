@@ -38,3 +38,8 @@
   width: 10em;
   text-align: right;
 }
+
+.show-items__no-result {
+  text-align: center;
+  color: red;
+}

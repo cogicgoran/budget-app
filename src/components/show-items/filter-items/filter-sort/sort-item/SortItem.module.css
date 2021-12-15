@@ -1,0 +1,23 @@
+.filter-sort-item {
+  cursor: pointer;
+}
+
+.filter-sort-item:hover,
+.filter-sort-item:active,
+.filter-sort-item:focus {
+  background-color: lightblue;
+}
+
+.svg-icon {
+  width: .8em;
+  margin-right: 6px;
+  max-height: .8em;
+  position: relative;
+  top: .1em;
+  color: #222;
+}
+
+.svg-checkmark {
+  margin-left: .4em;
+  color: rgb(74, 140, 161);
+}
