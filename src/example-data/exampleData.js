@@ -1,4 +1,4 @@
-export const DUMMY_ITEMS = [
+export const EXAMPLE_ITEMS = [
     {
       id: 'e1',
       product: "Marijana",

@@ -19,7 +19,7 @@ function filterPriceRangeReducer(state, action) {
       if ( value > maxVal) return { ...state, maxValue: maxVal};
       if ( value >= minValue) return { ...state, maxValue: value};
       return { minValue: value, maxValue: value};
-    default: console.log("weird");
+    default:
   }
 }
 

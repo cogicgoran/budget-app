@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import styles from './FilterItems.module.css';
 
 import FilterSearchInput from './filter-search-input/FilterSearchInput';
@@ -7,17 +7,17 @@ import FilterPriceRange from './filter-price-range/FilterPriceRange';
 import FilterDateRange from './filter-date-range/FilterDateRange';
 
 import { defaultSort } from './FilterSortData';
+import FilterItemsContext from 'context/filter-items-context';
 
-function FilterItems({ onFilterItems }) {
+function FilterItems() {
+  const { onFilterItems } = useContext(FilterItemsContext);
+
   const [searchValue, setSearchValue] = useState("");
   const [showSortingOptions, setShowSortingOptions] = useState(false);
   const [selectedSortValue, setSelectedSortValue] = useState(defaultSort);
 
-  console.log("filteritems RUNNING");
-
-  function searchChangeHandler(e) {
-    console.log("called");
-    setSearchValue(e.target.value);
+  function searchChangeHandler( event ) {
+    setSearchValue(event.target.value);
   };
 
   function toggleShowSortingOptionsHandler() {
@@ -30,7 +30,6 @@ function FilterItems({ onFilterItems }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("effect executed");
       onFilterItems({
         search: searchValue,
         sortFn: selectedSortValue.sortFn

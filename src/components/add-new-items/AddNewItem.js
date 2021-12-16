@@ -13,8 +13,8 @@ function AddNewItem( props ) {
         setIsFormToggled(prevState => !prevState);
     };
 
-    function formSubmitHandler(e) {
-        e.preventDefault();
+    function formSubmitHandler( event ) {
+        event.preventDefault();
         const product = productRef.current.value;
         const price = priceRef.current.value;
         const date = dateRef.current.value;

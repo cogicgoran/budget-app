@@ -11,8 +11,8 @@ const Input = React.forwardRef(function(props, ref) {
     const valueIsValid = validator(value);
     const valueHasError = valueIsTouched && !valueIsValid;
 
-  function valueChangeHandler(e) {
-    setValue(e.target.value);
+  function valueChangeHandler( event ) {
+    setValue(event.target.value);
   }
 
   function valueBlurHandler() {
