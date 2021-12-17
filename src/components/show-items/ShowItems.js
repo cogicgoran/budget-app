@@ -3,11 +3,11 @@ import styles from './ShowItems.module.css';
 import DisplayItems from './display-items/DisplayItems'
 import FilterItems from './filter-items/FilterItems';
 
-function ShowItems({ items, onFilterItems }) {
+function ShowItems({ items }) {
     
     return (
         <div className={styles["show-items"]}>
-            <FilterItems  onFilterItems={onFilterItems}/>
+            <FilterItems />
             <DisplayItems items={items}/>
             
         </div>

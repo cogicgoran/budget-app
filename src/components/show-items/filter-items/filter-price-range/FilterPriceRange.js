@@ -1,12 +1,14 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useContext } from 'react';
 import styles from './FilterPriceRange.module.css';
-import FilterPriceInput from './FilterPriceInput';
+import FilterPriceInputs from './FilterPriceInputs';
+import FilterRangeContext from 'context/filter-range-context';
+import FilterItemsContext from 'context/filter-items-context';
 
 function filterPriceRangeReducer(state, action) {
   const { payload } = action;
   const { value, maxVal} = payload;
   const { minValue, maxValue } = state;
-
+  console.log( value, minValue, maxValue, maxVal);
 
   switch (action.type) {
     case "minChange":
@@ -24,25 +26,26 @@ function filterPriceRangeReducer(state, action) {
 }
 
 function FilterPriceRange() {
-  const maxVal = 2999;
+  const { onPriceRangeChange } = useContext(FilterRangeContext);
+  const { maxVal } = useContext(FilterItemsContext);
   const [state, dispatch] = useReducer(filterPriceRangeReducer, {minValue: 0, maxValue: maxVal});
+
+  useEffect(() => {
+    onPriceRangeChange({minValue:state.minValue, maxValue: state.maxValue, maxVal: maxVal});
+  }, [state])
 
   return (
     <div className={styles["search-form__filter-price-range"]}>
-
-      <div>
-        <FilterPriceInput input={{id:"min-value-input", name:"min-value-input",type: "number", step: "1", min: "0", max: maxVal }}
-          onDispatch={dispatch} reducerType="minChange" value={state.minValue}/>
-        <FilterPriceInput input={{id:"min-value-range", name:"min-value-range",type: "range", step: "1", min: "0", max: maxVal }}
-          onDispatch={dispatch} reducerType="minChange" value={state.minValue}/>
-      </div>
-
-      <div>
-        <FilterPriceInput input={{id:"max-value-input", name:"max-value-input",type: "number", step: "1", min: "0", max: maxVal }}
-          onDispatch={dispatch} reducerType="maxChange" value={state.maxValue} />
-        <FilterPriceInput input={{id:"max-value-range", name:"max-value-range",type: "range", step: "1", min: "0", max: maxVal }}
-          onDispatch={dispatch} reducerType="maxChange" value={state.maxValue}/>
-      </div>
+        <div className={styles["search-form__filter-price-range-display"]}>
+          <span>Price Range:</span>
+          <span>{state.minValue} - {state.maxValue}</span>
+        </div>
+        <div>
+          <FilterPriceInputs key="min-value" input={{step: "1", min: "0", max: maxVal }}
+            onDispatch={dispatch} reducerType="minChange" value={state.minValue}/>
+          <FilterPriceInputs key="max-value" input={{step: "1", min: "0", max: maxVal }}
+            onDispatch={dispatch} reducerType="maxChange" value={state.maxValue}/>
+        </div>
     </div>
   );
 };

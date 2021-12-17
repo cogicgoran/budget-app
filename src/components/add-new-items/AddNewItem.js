@@ -19,7 +19,7 @@ function AddNewItem( props ) {
         const price = priceRef.current.value;
         const date = dateRef.current.value;
 
-        if(!(validateProductName(product) && validateProductPrice(price) && validateProductDate(date))) return;
+        if (!(validateProductName(product) && validateProductPrice(price) && validateProductDate(date))) return;
 
         const item = {
             product: product,

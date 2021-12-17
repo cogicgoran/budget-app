@@ -1,8 +1,8 @@
 export const EXAMPLE_ITEMS = [
     {
       id: 'e1',
-      product: "Marijana",
-      price: "99999999",
+      product: "Magla",
+      price: "5000",
       date: new Date("2021-05-12")
     },
     {

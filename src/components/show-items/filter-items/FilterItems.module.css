@@ -28,3 +28,10 @@
   display: flex;
   gap: 1em;
 }
+
+.search-form__filters-container > * {
+  flex: 1 0 0;
+  padding: 0.2em;
+  border-radius: .2em;
+  background-color: rgb(123, 182, 202);
+}

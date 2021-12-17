@@ -12,6 +12,9 @@ function App() {
   const [items, setItems] = useState(EXAMPLE_ITEMS);
   const [filteredItems, setFilteredItems] = useState([]);
   const [counterID, setcounterID] = useState(1);
+
+  // debugger;
+  const maxVal = useMemo(() => Math.max(...items.map(item => +item.price)), [items]);
   
   const addNewItemHandler = useCallback((item) => {
     item.id = counterID;
@@ -20,10 +23,12 @@ function App() {
   },[counterID]);
   
   // TODO: Find a way to not re-evaluate ShowItems if arguments passed have not changed
-  const filterItemsHandler = useCallback(({ search, sortFn }) => {
+  const filterItemsHandler = useCallback(({ search, sortFn, priceRange }) => {
     const lowerSearch = search.toLowerCase();
     const filterBySearch = items.filter(item => item.product.toLowerCase().includes(lowerSearch));
-    setFilteredItems(filterBySearch.sort(sortFn));
+    const filterAfterSort = filterBySearch.sort(sortFn);
+    const filterAfterRange = filterAfterSort.filter(item => +item.price >= priceRange.minValue && +item.price <= priceRange.maxValue);
+    setFilteredItems(filterAfterRange);
   },[items]);
   
   const filteredItemsMemoed = useMemo(() => {return [...filteredItems]}, [filteredItems]);
@@ -32,8 +37,8 @@ function App() {
     <div className={styles["app-container"]}>
       <Header />
       <AddNewItem onAddNewItem={addNewItemHandler}/>
-      <FilterItemsContext.Provider value={{onFilterItems:filterItemsHandler}}>
-        <ShowItems items={filteredItemsMemoed} onFilterItems={filterItemsHandler}/>
+      <FilterItemsContext.Provider value={{onFilterItems:filterItemsHandler, maxVal}}>
+        <ShowItems items={filteredItemsMemoed}/>
       </FilterItemsContext.Provider>
     </div>
   );
