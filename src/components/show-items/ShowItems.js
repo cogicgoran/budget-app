@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import styles from './ShowItems.module.css';
 import DisplayItems from './display-items/DisplayItems'
 import FilterItems from './filter-items/FilterItems';
@@ -9,7 +9,6 @@ function ShowItems({ items }) {
         <div className={styles["show-items"]}>
             <FilterItems />
             <DisplayItems items={items}/>
-            
         </div>
     )
 }

@@ -2,27 +2,27 @@ import { SVGClock, SVGDollar, SVGSortAscName, SVGSortAscNumber, SVGSortDescName,
 
 function sortDateDescending(a, b) {
   return a.date.getTime() > b.date.getTime() ? -1 : 1;
-}
+};
 
 function sortDateAscending(a, b) {
   return a.date.getTime() > b.date.getTime() ? 1 : -1;
-}
+};
 
 function sortNameDescending(a, b) {
   return a.product.toLowerCase() > b.product.toLowerCase() ? -1 : 1;
-}
+};
 
 function sortNameAscending(a, b) {
   return a.product.toLowerCase() > b.product.toLowerCase() ? 1 : -1;
-}
+};
 
 function sortPriceDescending(a, b) {
   return +a.price > +b.price ? -1 : 1;
-}
+};
 
 function sortPriceAscending(a, b) {
   return +a.price > +b.price ? 1 : -1;
-}
+};
 
 export const dataLabelSortSet = [
   {label: "Newer", data:"date-desc", sortFn: sortDateDescending, pre:[SVGSortDescNumber, SVGClock]},

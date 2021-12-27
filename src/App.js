@@ -6,6 +6,7 @@ import ShowItems from './components/show-items/ShowItems';
 import { useState, useCallback, useMemo } from 'react';
 import { EXAMPLE_ITEMS } from './example-data/exampleData';
 import FilterItemsContext from 'context/filter-items-context';
+import { getFilteredItems } from './App.functions';
 
 function App() {
   
@@ -13,8 +14,10 @@ function App() {
   const [filteredItems, setFilteredItems] = useState([]);
   const [counterID, setcounterID] = useState(1);
 
-  // debugger;
   const maxVal = useMemo(() => Math.max(...items.map(item => +item.price)), [items]);
+  const dateMaxMin = useMemo(() => {
+    return {maxDate:Math.max(...items.map(item => item.date.getTime())), minDate:Math.min(...items.map(item => item.date.getTime()))};
+  }, [items]);
   
   const addNewItemHandler = useCallback((item) => {
     item.id = counterID;
@@ -23,13 +26,10 @@ function App() {
   },[counterID]);
   
   // TODO: Find a way to not re-evaluate ShowItems if arguments passed have not changed
-  const filterItemsHandler = useCallback(({ search, sortFn, priceRange }) => {
-    const lowerSearch = search.toLowerCase();
-    const filterBySearch = items.filter(item => item.product.toLowerCase().includes(lowerSearch));
-    const filterAfterSort = filterBySearch.sort(sortFn);
-    const filterAfterRange = filterAfterSort.filter(item => +item.price >= priceRange.minValue && +item.price <= priceRange.maxValue);
-    setFilteredItems(filterAfterRange);
-  },[items]);
+  const filterItemsHandler = useCallback(function (filterValues){
+    const newFilteredItems = getFilteredItems(items, filterValues);
+    setFilteredItems(newFilteredItems);
+  } ,[items]);
   
   const filteredItemsMemoed = useMemo(() => {return [...filteredItems]}, [filteredItems]);
 
@@ -37,7 +37,7 @@ function App() {
     <div className={styles["app-container"]}>
       <Header />
       <AddNewItem onAddNewItem={addNewItemHandler}/>
-      <FilterItemsContext.Provider value={{onFilterItems:filterItemsHandler, maxVal}}>
+      <FilterItemsContext.Provider value={{onFilterItems:filterItemsHandler, maxVal, dateMaxMin}}>
         <ShowItems items={filteredItemsMemoed}/>
       </FilterItemsContext.Provider>
     </div>

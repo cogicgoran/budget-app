@@ -26,6 +26,7 @@
 
 .search-form__filters-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 1em;
 }
 
@@ -34,4 +35,10 @@
   padding: 0.2em;
   border-radius: .2em;
   background-color: rgb(123, 182, 202);
+}
+
+@media screen and (max-width: 992px) {
+  .search-form__filters-container > * {
+    flex: 0 0 100%;
+  }
 }
